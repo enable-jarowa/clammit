@@ -20,6 +20,7 @@ import (
 //
 type ScanInterceptor struct {
 	VirusStatusCode int
+	VirusFoundBody  string
 	Scanner         scanner.Scanner
 }
 
@@ -115,7 +116,7 @@ func (c *ScanInterceptor) respondOnVirus(w http.ResponseWriter, filename string,
 		return true
 	} else if hasVirus {
 		w.WriteHeader(c.VirusStatusCode)
-		w.Write([]byte(fmt.Sprintf("File %s has a virus!", filename)))
+		w.Write([]byte(fmt.Sprintf(c.VirusFoundBody, filename)))
 		return true
 	}
 	return false

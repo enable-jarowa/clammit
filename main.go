@@ -68,6 +68,8 @@ type ApplicationConfig struct {
 	ClamdURL string `gcfg:"clamd-url"`
 	// The HTTP status code to return when a virus is found
 	VirusStatusCode int `gcfg:"virus-status-code"`
+	// Enable to add a configurable body for virus found. Include a % in the messageg for the virus name
+	VirusFoundBody string `gcfg:"virus-found-body"`
 	// If the body content-length exceeds this value, it will be written to
 	// disk. Below it, we'll hold the whole body in memory to improve speed.
 	ContentMemoryThreshold int64 `gcfg:"content-memory-threshold"`
@@ -92,6 +94,7 @@ var DefaultApplicationConfig = ApplicationConfig{
 	ApplicationURL:         "",
 	ClamdURL:               "",
 	VirusStatusCode:        418,
+	VirusFoundBody:         "File %s has a virus!",
 	ContentMemoryThreshold: 1024 * 1024,
 	Logfile:                "",
 	TestPages:              true,
@@ -222,7 +225,7 @@ func startLogging() {
 		if err == nil {
 			ctx.Logger = log.New(w, "", log.LstdFlags)
 		} else {
-			log.Fatal("Failed to open log file", ctx.Config.App.Logfile, ":", err)
+			log.Fatal("Failed to open log file ", ctx.Config.App.Logfile, ":", err)
 		}
 	} else {
 		ctx.Logger = log.New(os.Stdout, "", log.LstdFlags)

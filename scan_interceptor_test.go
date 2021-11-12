@@ -13,6 +13,10 @@ import (
 )
 
 const virusCode = 418
+const virusFoundBody = "File test %s has a virus!"
+const virusFoundBodyFooDatTest = "File test foo.dat has a virus!"
+const virusFoundBodyVirusDatTest = "File test virus.dat has a virus!"
+const virusFoundBodyUntitledTest = "File test untitled has a virus!"
 
 var mockVirusFound = false
 
@@ -26,6 +30,7 @@ func (s MockScanner) HasVirus(reader io.Reader) (bool, error) {
 
 var scanInterceptor = ScanInterceptor{
 	VirusStatusCode: virusCode,
+	VirusFoundBody:  virusFoundBody,
 	Scanner:         new(MockScanner),
 }
 
@@ -54,7 +59,7 @@ func TestNonMultipartRequest_VirusFound_Without_ContentDisposition(t *testing.T)
 		t.Errorf("handler returned wrong status code: got %v want %v",
 			status, virusCode)
 	}
-	expected := `File untitled has a virus!`
+	expected := virusFoundBodyUntitledTest
 	if rr.Body.String() != expected {
 		t.Errorf("handler returned unexpected body: got %v want %v",
 			rr.Body.String(), expected)
@@ -73,7 +78,7 @@ func TestNonMultipartRequest_VirusFound_With_ContentDisposition(t *testing.T) {
 		t.Errorf("handler returned wrong status code: got %v want %v",
 			status, virusCode)
 	}
-	expected := `File virus.dat has a virus!`
+	expected := virusFoundBodyVirusDatTest
 	if rr.Body.String() != expected {
 		t.Errorf("handler returned unexpected body: got %v want %v",
 			rr.Body.String(), expected)
@@ -107,7 +112,7 @@ func TestMultipartRequest_VirusFound(t *testing.T) {
 		t.Errorf("handler returned wrong status code: got %v want %v",
 			status, virusCode)
 	}
-	expected := `File foo.dat has a virus!`
+	expected := virusFoundBodyFooDatTest
 	if rr.Body.String() != expected {
 		t.Errorf("handler returned unexpected body: got %v want %v",
 			rr.Body.String(), expected)

@@ -17,6 +17,13 @@ listen          = unix:.clammit.sock
 #
 #application-url = http://localhost:9240/
 
+# The HTTP status code to return when a virus is found. Default 418
+#virus-status-code=418
+
+#Returns this message if a virus was found. Integrate variable % in message for virus name
+#see default message below
+#virus-found-body="File %s has a virus!"
+
 #
 # URL of the CLAMD server
 #
