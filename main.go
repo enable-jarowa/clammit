@@ -188,6 +188,7 @@ func main() {
 
 	ctx.ScanInterceptor = &ScanInterceptor{
 		VirusStatusCode: ctx.Config.App.VirusStatusCode,
+		VirusFoundBody:  ctx.Config.App.VirusFoundBody,
 		Scanner:         ctx.Scanner,
 	}
 
