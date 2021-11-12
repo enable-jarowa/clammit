@@ -204,7 +204,7 @@ make test         | Runs the application unit tests
 
 after all build and tests are done release a new version
 
-1. tag the code with a release number "v0.0.0" or "v.0.0.0-any-additional-string" and replace 0.0.0 with your releae number
+1. tag the code with a release number "v0.0.0" or "v.0.0.0-any-additional-string" and replace 0.0.0 with your release number
 2. create new access token that has access to write releases (on your fork)
 3. set the environment variable
 
