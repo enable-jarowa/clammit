@@ -217,6 +217,12 @@ after all build and tests are done release a new version
   make release
 ```
 5. use your release in the installation
+6. if you receive the message "! [rejected] v0.0.0 -> v0.0.0  (would clobber existing tag)" while pushing to git, you have to do a force to fetch tags 
+
+```
+git fetch --tags -f
+```
+and push again
 
 ## Installation
 
