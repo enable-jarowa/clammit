@@ -139,7 +139,7 @@ listen                   | The listen address (see below)
 unix-socket-perms        | The file mode of the UNIX socket, if listening on one
 clamd-url                | The URL of the clamd server
 virus-status-code        | (Optional) The HTTP status code to return when a virus is found. Default 418
-virus-found-body         | (Optional) Returns this message if a virus was found. Integrate variable % in message for virus name
+virus-found-body         | (Optional) Returns this message if a virus was found. Integrate variable %s in message for virus name
 application-url          | (Optional) Forward all requests to this application
 content-memory-threshold | (Optional) Maximum payload size to keep in RAM. Larger files are spooled to disk
 log-file                 | (Optional) The clammit log file, if ommitted will log to stdout
